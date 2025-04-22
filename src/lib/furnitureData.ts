@@ -1,4 +1,3 @@
-
 // Furniture data model with images and 3D model information
 export interface Furniture {
   id: string;
@@ -13,10 +12,10 @@ export interface Furniture {
     warranty: string;
   };
   color: string;
-  modelUrl: string; // URL to the 3D model
-  imageUrl: string; // Main product image
+  modelUrl: string;
+  imageUrl: string;
   thumbnailUrl: string;
-  sketchfabId: string; // Sketchfab model ID
+  sketchfabId: string;
 }
 
 // Sample furniture data
@@ -56,6 +55,60 @@ export const furnitureData: Furniture[] = [
     imageUrl: "/furniture-2.jpg",
     thumbnailUrl: "/furniture-2-thumb.jpg",
     sketchfabId: "d67e67fbfb034b3a9eed17e633301416"
+  },
+  {
+    id: "3",
+    name: "Scandinavian Coffee Table",
+    price: 8499,
+    description: "A minimalist coffee table with a Scandinavian touch. Made from solid ash wood, perfect for cozy spaces.",
+    features: ["Solid wood top", "Matte finish", "Tapered legs", "Easy to clean"],
+    specifications: {
+      material: "Ash wood, Veneer",
+      dimensions: "120cm x 60cm x 45cm",
+      weight: "12 kg",
+      warranty: "1 year"
+    },
+    color: "Light Wood",
+    modelUrl: "https://sketchfab.com/models/2e4a8a6f59a546eabdfec52a65d55ab4/embed",
+    imageUrl: "/furniture-3.jpg",
+    thumbnailUrl: "/furniture-3-thumb.jpg",
+    sketchfabId: "2e4a8a6f59a546eabdfec52a65d55ab4"
+  },
+  {
+    id: "4",
+    name: "Industrial Bookshelf",
+    price: 18999,
+    description: "A five-tier bookshelf combining rustic wood and black steel for an industrial vibe. Ideal for living rooms and home offices.",
+    features: ["Rustic wood finish", "Heavy-duty steel frame", "Adjustable shelves", "Anti-tip hardware included"],
+    specifications: {
+      material: "Engineered wood, Powder-coated steel",
+      dimensions: "80cm x 30cm x 180cm",
+      weight: "30 kg",
+      warranty: "3 years"
+    },
+    color: "Rustic Brown",
+    modelUrl: "https://sketchfab.com/models/1af8e88439b649e1aa6a9a9b0b2fbd4f/embed",
+    imageUrl: "/furniture-4.jpg",
+    thumbnailUrl: "/furniture-4-thumb.jpg",
+    sketchfabId: "1af8e88439b649e1aa6a9a9b0b2fbd4f"
+  },
+  {
+    id: "5",
+    name: "Executive Office Desk",
+    price: 32999,
+    description: "A luxurious executive desk featuring spacious storage, cable management, and a smooth walnut finish.",
+    features: ["Lockable drawers", "Built-in cable tray", "Soft-close mechanism", "Walnut wood finish"],
+    specifications: {
+      material: "Walnut veneer, MDF core, Metal legs",
+      dimensions: "160cm x 70cm x 76cm",
+      weight: "50 kg",
+      warranty: "5 years"
+    },
+    color: "Walnut Brown",
+    modelUrl: "https://sketchfab.com/models/f6d4a6b546d1449ba3e5439a476f01a2/embed",
+    imageUrl: "/furniture-5.jpg",
+    thumbnailUrl: "/furniture-5-thumb.jpg",
+    sketchfabId: "f6d4a6b546d1449ba3e5439a476f01a2"
   }
 ];
 
