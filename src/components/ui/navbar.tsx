@@ -12,7 +12,7 @@ export const Navbar = () => {
         <div className="flex h-16 items-center justify-between">
           <div className="flex-1 flex items-center">
             <Link to="/" className="text-2xl font-bold">
-              3D Cars
+              FurnishCraft
             </Link>
           </div>
           
@@ -21,7 +21,7 @@ export const Navbar = () => {
               Home
             </Link>
             <Link to="/products" className="text-foreground hover:text-primary transition-colors">
-              Products
+              Furniture
             </Link>
           </nav>
           

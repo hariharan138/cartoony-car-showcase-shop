@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -14,15 +13,14 @@ import Checkout from "./pages/Checkout";
 import Payment from "./pages/Payment";
 import OrderConfirmation from "./pages/OrderConfirmation";
 import { useEffect } from "react";
-import { initializeCarData } from "./lib/carData";
+import { initializeFurnitureData } from "./lib/furnitureData";
 import { Navbar } from "./components/ui/navbar";
 
 const queryClient = new QueryClient();
 
 const App = () => {
-  // Initialize car data in local storage if not exists
   useEffect(() => {
-    initializeCarData();
+    initializeFurnitureData();
   }, []);
 
   return (
