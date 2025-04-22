@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getFurnitureById, Furniture } from "@/lib/furnitureData";
@@ -24,45 +23,18 @@ const ProductDetails = () => {
   }, [id]);
 
   useEffect(() => {
-    // Load Sketchfab API and initialize the viewer if furniture data is available
     if (furniture && viewerRef.current) {
-      const script = document.createElement('script');
-      script.src = 'https://static.sketchfab.com/api/sketchfab-viewer-1.12.0.js';
-      script.async = true;
-      
-      script.onload = () => {
-        const iframe = document.createElement('iframe');
-        iframe.src = furniture.modelUrl;
-        iframe.style.width = '100%';
-        iframe.style.height = '400px';
-        iframe.allow = "autoplay; fullscreen; vr";
-        iframe.setAttribute("allowfullscreen", "");
-        
-        if (viewerRef.current) {
-          viewerRef.current.innerHTML = '';
-          viewerRef.current.appendChild(iframe);
-          
-          // Initialize Sketchfab viewer
-          const client = new (window as any).Sketchfab(iframe);
-          client.init(furniture.sketchfabId, {
-            success: function (api: any) {
-              api.start();
-              api.addEventListener('viewerready', function () {
-                console.log("3D Viewer ready");
-              });
-            },
-            error: function () {
-              console.error("Sketchfab viewer failed to load");
-            }
-          });
-        }
-      };
-      
-      document.body.appendChild(script);
-      
-      return () => {
-        document.body.removeChild(script);
-      };
+      // Clear previous content
+      viewerRef.current.innerHTML = '';
+
+      const iframe = document.createElement('iframe');
+      iframe.src = `${furniture.modelUrl}?ui_infos=0&ui_controls=0&ui_stop=0&autostart=1&preload=1`;
+      iframe.style.width = '100%';
+      iframe.style.height = '400px';
+      iframe.allow = "autoplay; fullscreen; vr";
+      iframe.setAttribute("allowfullscreen", "");
+
+      viewerRef.current.appendChild(iframe);
     }
   }, [furniture]);
 
@@ -95,27 +67,23 @@ const ProductDetails = () => {
       <div className="flex flex-col lg:flex-row gap-8">
         {/* 3D Viewer */}
         <div className="lg:w-3/5">
-          <div 
-            ref={viewerRef} 
+          <div
+            ref={viewerRef}
             className="w-full h-[400px] bg-muted rounded-lg overflow-hidden"
-          >
-            <div className="w-full h-full flex items-center justify-center">
-              <p>Loading 3D model...</p>
-            </div>
-          </div>
+          />
         </div>
 
         {/* Product Info */}
         <div className="lg:w-2/5">
           <h1 className="text-3xl font-bold">{furniture.name}</h1>
           <p className="text-2xl font-semibold text-primary mt-2">₹{furniture.price.toLocaleString()}</p>
-          
+
           <div className="mt-4">
             <p className="text-muted-foreground">{furniture.description}</p>
           </div>
-          
+
           <Separator className="my-6" />
-          
+
           <div className="my-4">
             <h3 className="font-semibold mb-2">Features:</h3>
             <ul className="list-disc pl-5 space-y-1">
@@ -124,7 +92,7 @@ const ProductDetails = () => {
               ))}
             </ul>
           </div>
-          
+
           <div className="my-4">
             <h3 className="font-semibold mb-2">Specifications:</h3>
             <Card>
@@ -140,7 +108,7 @@ const ProductDetails = () => {
               </CardContent>
             </Card>
           </div>
-          
+
           <div className="mt-8">
             <div className="flex items-center gap-4 mb-4">
               <label htmlFor="quantity">Quantity:</label>
@@ -153,7 +121,7 @@ const ProductDetails = () => {
                 className="w-16 p-2 border rounded"
               />
             </div>
-            
+
             <div className="flex space-x-4">
               <Button onClick={handleAddToCart} className="flex-1">
                 Add to Cart
@@ -162,7 +130,7 @@ const ProductDetails = () => {
                 <Link to="/cart">View Cart</Link>
               </Button>
             </div>
-            
+
             <Button asChild variant="link" className="mt-4">
               <Link to="/products">Back to Products</Link>
             </Button>
