@@ -69,7 +69,7 @@ export const furnitureData: Furniture[] = [
       warranty: "1 year"
     },
     color: "Light Wood",
-    modelUrl: "https://sketchfab.com/models/2e4a8a6f59a546eabdfec52a65d55ab4/embed",
+    modelUrl: "https://sketchfab.com/models/5799f3df37d54959b3d2fec0614336b3/embed",
     imageUrl: "/furniture-3.jpg",
     thumbnailUrl: "/furniture-3-thumb.jpg",
     sketchfabId: "2e4a8a6f59a546eabdfec52a65d55ab4"
