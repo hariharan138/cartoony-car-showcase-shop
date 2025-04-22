@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getCarById, Car } from "@/lib/carData";
+import { getFurnitureById, Furniture } from "@/lib/furnitureData";
 import { useCart } from "../context/CartContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -9,30 +9,30 @@ import { Separator } from "@/components/ui/separator";
 
 const ProductDetails = () => {
   const { id } = useParams<{ id: string }>();
-  const [car, setCar] = useState<Car | null>(null);
+  const [furniture, setFurniture] = useState<Furniture | null>(null);
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useCart();
   const viewerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (id) {
-      const carData = getCarById(id);
-      if (carData) {
-        setCar(carData);
+      const furnitureData = getFurnitureById(id);
+      if (furnitureData) {
+        setFurniture(furnitureData);
       }
     }
   }, [id]);
 
   useEffect(() => {
-    // Load Sketchfab API and initialize the viewer if car data is available
-    if (car && viewerRef.current) {
+    // Load Sketchfab API and initialize the viewer if furniture data is available
+    if (furniture && viewerRef.current) {
       const script = document.createElement('script');
       script.src = 'https://static.sketchfab.com/api/sketchfab-viewer-1.12.0.js';
       script.async = true;
       
       script.onload = () => {
         const iframe = document.createElement('iframe');
-        iframe.src = car.modelUrl;
+        iframe.src = furniture.modelUrl;
         iframe.style.width = '100%';
         iframe.style.height = '400px';
         iframe.allow = "autoplay; fullscreen; vr";
@@ -44,7 +44,7 @@ const ProductDetails = () => {
           
           // Initialize Sketchfab viewer
           const client = new (window as any).Sketchfab(iframe);
-          client.init(car.sketchfabId, {
+          client.init(furniture.sketchfabId, {
             success: function (api: any) {
               api.start();
               api.addEventListener('viewerready', function () {
@@ -64,22 +64,22 @@ const ProductDetails = () => {
         document.body.removeChild(script);
       };
     }
-  }, [car]);
+  }, [furniture]);
 
   const handleAddToCart = () => {
-    if (car) {
+    if (furniture) {
       addToCart({
-        id: car.id,
-        name: car.name,
-        price: car.price,
+        id: furniture.id,
+        name: furniture.name,
+        price: furniture.price,
         quantity,
-        thumbnail: car.thumbnailUrl
+        thumbnail: furniture.thumbnailUrl
       });
       alert("Added to cart!");
     }
   };
 
-  if (!car) {
+  if (!furniture) {
     return (
       <div className="container mx-auto px-4 py-16 text-center">
         <h1 className="text-3xl">Product not found</h1>
@@ -107,11 +107,11 @@ const ProductDetails = () => {
 
         {/* Product Info */}
         <div className="lg:w-2/5">
-          <h1 className="text-3xl font-bold">{car.name}</h1>
-          <p className="text-2xl font-semibold text-primary mt-2">₹{car.price}</p>
+          <h1 className="text-3xl font-bold">{furniture.name}</h1>
+          <p className="text-2xl font-semibold text-primary mt-2">₹{furniture.price.toLocaleString()}</p>
           
           <div className="mt-4">
-            <p className="text-muted-foreground">{car.description}</p>
+            <p className="text-muted-foreground">{furniture.description}</p>
           </div>
           
           <Separator className="my-6" />
@@ -119,7 +119,7 @@ const ProductDetails = () => {
           <div className="my-4">
             <h3 className="font-semibold mb-2">Features:</h3>
             <ul className="list-disc pl-5 space-y-1">
-              {car.features.map((feature, index) => (
+              {furniture.features.map((feature, index) => (
                 <li key={index}>{feature}</li>
               ))}
             </ul>
@@ -129,14 +129,14 @@ const ProductDetails = () => {
             <h3 className="font-semibold mb-2">Specifications:</h3>
             <Card>
               <CardContent className="p-4 grid grid-cols-2 gap-2 text-sm">
-                <div>Top Speed:</div>
-                <div>{car.specifications.topSpeed}</div>
-                <div>Acceleration:</div>
-                <div>{car.specifications.acceleration}</div>
-                <div>Engine:</div>
-                <div>{car.specifications.engine}</div>
-                <div>Transmission:</div>
-                <div>{car.specifications.transmission}</div>
+                <div>Material:</div>
+                <div>{furniture.specifications.material}</div>
+                <div>Dimensions:</div>
+                <div>{furniture.specifications.dimensions}</div>
+                <div>Weight:</div>
+                <div>{furniture.specifications.weight}</div>
+                <div>Warranty:</div>
+                <div>{furniture.specifications.warranty}</div>
               </CardContent>
             </Card>
           </div>
