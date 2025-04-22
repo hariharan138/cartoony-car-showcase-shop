@@ -8,6 +8,7 @@ import { CartProvider } from "./context/CartContext";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Products from "./pages/Products";
+import Categories from "./pages/Categories";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
@@ -34,6 +35,7 @@ const App = () => {
             <Navbar />
             <Routes>
               <Route path="/" element={<Index />} />
+              <Route path="/categories" element={<Categories />} />
               <Route path="/products" element={<Products />} />
               <Route path="/products/:id" element={<ProductDetails />} />
               <Route path="/cart" element={<Cart />} />
